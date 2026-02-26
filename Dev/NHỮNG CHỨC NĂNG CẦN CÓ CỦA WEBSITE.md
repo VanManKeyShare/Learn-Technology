@@ -1,0 +1,43 @@
+
+# NHỮNG CHỨC NĂNG CẦN CÓ CỦA WEBSITE
+
+## 1. THÔNG BÁO BẢO TRÌ
+
+## 2. ĐĂNG KÝ TÀI KHOẢN
+
+```code
+KIỂM TRA CẤU HÌNH (CHO PHÉP ĐĂNG KÝ)
+-> FALSE: THÔNG BÁO KHÔNG CHO ĐĂNG KÝ, LIÊN HỆ QUẢN TRỊ VIÊN
+-> TRUE:
+	- KIỂM TRA CẤU HÌNH (CAPTCHA MẶC ĐỊNH / DỊCH VỤ)
+		-> MẶC ĐỊNH: HIỂN THỊ FORM NHẬP LIỆU CÓ CAPTCHA MẶC ĐỊNH CỦA PHẦN MỀM
+		-> DỊCH VỤ: HIỂN THỊ FORM NHẬP LIỆU CÓ CAPTCHA DỊCH VỤ THEO API
+	- NGƯỜI DÙNG NHẬP THÔNG TIN: CUNG CẤP THÔNG TIN CHO QUÁ TRÌNH ĐĂNG KÝ
+	- NGƯỜI DÙNG NHẤN ĐĂNG KÝ
+		-> KIỂM TRA XÁC THỰC MÃ CAPTCHA
+		-> KIỂM TRA CẤU HÌNH (PHƯƠNG THỨC XÁC THỰC TÀI KHOẢN)
+			-> ADMIN DUYỆT => THÔNG BÁO CHỜ QUẢN TRỊ VIÊN XÁC NHẬN, LIÊN HỆ QUẢN TRỊ VIÊN
+			-> EMAIL/PHONE/SMS => GỬI MÃ XÁC THỰC => NGƯỜI DÙNG NHẬP MÃ XÁC THỰC + CAPTCHA
+```
+
+## 3. ĐĂNG NHẬP TÀI KHOẢN
+
+```code
+- KIỂM TRA CẤU HÌNH (CAPTCHA MẶC ĐỊNH / DỊCH VỤ)
+	-> MẶC ĐỊNH: HIỂN THỊ FORM NHẬP LIỆU CÓ CAPTCHA MẶC ĐỊNH CỦA PHẦN MỀM
+	-> DỊCH VỤ: HIỂN THỊ FORM NHẬP LIỆU CÓ CAPTCHA DỊCH VỤ THEO API
+- NGƯỜI DÙNG NHẬP THÔNG TIN CẦN THIẾT ĐỂ ĐĂNG NHẬP
+- NGƯỜI DÙNG NHẤN ĐĂNG NHẬP
+	-> KIỂM TRA XÁC THỰC MÃ CAPTCHA
+	-> KIỂM TRA THÔNG TIN ĐĂNG NHẬP
+		-> NẾU KHÔNG THÀNH CÔNG
+			-> THÔNG BÁO SAI THÔNG TIN TÀI KHOẢN
+			-> GHI LẠI LỊCH SỬ HOẠT ĐỘNG
+			-> NẾU SAI QUÁ 3 LẦN CHẶN IP 30 PHÚT
+		-> NẾU THÀNH CÔNG
+			-> KIỂM TRA TRẠNG THÁI TÀI KHOẢN -> NẾU BỊ KHÓA -> THÔNG BÁO TÀI KHOẢN BỊ KHÓA, LIÊN HỆ QUẢN TRỊ VIÊN
+			-> KIỂM TRA PHƯƠNG THỨC XÁC THỰC CỦA TÀI KHOẢN
+				-> KHÔNG CÓ -> THÌ BỎ QUA
+				-> NẾU 2FA/EMAIL/SMS/PHONE -> YÊU CẦU NHẬP MÃ
+			-> GHI LẠI LỊCH SỬ HOẠT ĐỘNG
+```
