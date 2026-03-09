@@ -1,0 +1,6 @@
+# LỆNH TẠO DOCKER NETWORK
+> TẠO NETWORK CHO NHIỀU CONTAINER KẾT NỐI VỚI NHAU
+
+```bash
+docker network create VMK_NETWORK_01
+```
