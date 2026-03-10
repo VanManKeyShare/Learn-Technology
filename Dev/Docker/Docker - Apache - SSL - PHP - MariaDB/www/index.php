@@ -1,6 +1,6 @@
 <?php
 
-$mysqli = new mysqli("mariadb-phalcon", "mysql_admin", "mysql_admin_pwd_123", "mysql_db");
+$mysqli = new mysqli("db", "my_user", "my_pwd", "my_db");
 
 if ($mysqli->connect_error) {
     die("CONNECTION FAILED: " . $mysqli->connect_error);

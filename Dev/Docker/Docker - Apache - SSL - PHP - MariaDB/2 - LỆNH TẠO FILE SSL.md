@@ -1,6 +1,6 @@
 # CÀI ĐẶT OPENSSL
 
-- ĐỊA CHỈ TẢI OPENSSL: [https://slproweb.com/download/Win64OpenSSL-3_6_1.msi](https://slproweb.com/download/Win64OpenSSL-3_6_1.msi)
+- ĐỊA CHỈ TẢI OPENSSL = [https://slproweb.com/download/Win64OpenSSL-3_6_1.msi](https://slproweb.com/download/Win64OpenSSL-3_6_1.msi)
 - SAU KHI CÀI ĐẶT THÌ MỞ FILE "SYSDM.CPL"
 - CHỌN THẺ "ADVANCED" NHẤN NÚT "ENVIRONMENT VARIABLES"
 - CHỌN "PATH" TRONG DANH SÁCH "SYSTEM VARIABLES" NHẤN NÚT "EDIT"
@@ -12,5 +12,5 @@
 MỞ TERMINAL CHẠY LỆNH SAU
 
 ```bash
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout vmk.key -out vmk.crt
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout vmk_key.pem -out vmk_cert.pem
 ```
