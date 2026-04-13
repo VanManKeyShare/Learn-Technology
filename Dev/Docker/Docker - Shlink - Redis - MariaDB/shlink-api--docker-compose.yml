@@ -1,0 +1,28 @@
+services:
+  shlink:
+    image: shlinkio/shlink:stable
+    container_name: shlink
+    restart: unless-stopped
+    networks:
+      - VMK_NETWORK_01
+    ports:
+      - "8081:8080"
+    env_file:
+      - GEOLITE_LICENSE_KEY.env
+    environment:
+      - DB_PORT=3306
+      - DB_DRIVER=maria
+      - DB_HOST=mariadb
+      - DB_NAME=mysql_db
+      - DB_USER=mysql_admin
+      - DB_PASSWORD=mysql_admin_pwd_123
+      - IS_HTTPS_ENABLED=false
+      - TIMEZONE=Asia/Ho_Chi_Minh
+      - DEFAULT_DOMAIN=LOCALHOST:8081
+      - REDIS_SERVERS=redis://:9999@redis:6379
+      - INITIAL_API_KEY=HXIWazWnH4QFemrZpe6ABkMoDlgLE5Yg
+      - SHELL_VERBOSITY=3
+
+networks:
+  VMK_NETWORK_01:
+    external: true

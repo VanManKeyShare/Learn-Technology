@@ -1,0 +1,23 @@
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql_roo_pwd_123
+      MYSQL_DATABASE: mysql_db
+      MYSQL_USER: mysql_admin
+      MYSQL_PASSWORD: mysql_admin_pwd_123
+    networks:
+      - VMK_NETWORK_01
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql:/var/lib/mysql
+
+volumes:
+  mysql:
+
+networks:
+  VMK_NETWORK_01:
+    external: true
