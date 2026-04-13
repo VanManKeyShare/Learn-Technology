@@ -1,0 +1,53 @@
+services:
+  web:
+    build: ./docker/
+    container_name: apache-ssl-php
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./www:/var/www/html
+      - ./docker/apache/vhost.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./docker/ssl:/etc/apache2/ssl
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+    depends_on:
+      - db
+      - redis
+    environment:
+      - DB_HOST=db
+      - DB_NAME=my_db
+      - DB_USER=my_user
+      - DB_PASS=my_pwd
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_TIMEOUT=2.5
+      - REDIS_PASSWORD=9999
+
+  db:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: my_roo_pwd
+      MYSQL_DATABASE: my_db
+      MYSQL_USER: my_user
+      MYSQL_PASSWORD: my_pwd
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "9999"]
+    volumes:
+      - redis:/data
+
+volumes:
+  mysql:
+  redis:
