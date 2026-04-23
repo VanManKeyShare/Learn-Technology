@@ -1,0 +1,27 @@
+services:
+  apiserver:
+    build:
+      context: .
+      dockerfile: ./docker/DockerFile
+    container_name: apiserver
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443" # KHÔNG MỞ PORT 443 KHI SỬ DỤNG SSL THÔNG QUA NGINX PROXY MANAGER
+    networks:
+      - VMK_NETWORK_01
+    environment:
+      DB_HOST: mariadb
+      DB_PORT: 3306
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: pwd_redis
+      MYSQL_DATABASE: mysql_db
+      MYSQL_USER: mysql_user
+      MYSQL_PASSWORD: mysql_pwd
+    volumes:
+      - ./source:/app
+
+networks:
+  VMK_NETWORK_01:
+    external: true

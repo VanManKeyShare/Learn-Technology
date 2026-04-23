@@ -1,0 +1,15 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY source/Require.package .
+
+RUN pip install --no-cache-dir -r Require.package
+
+COPY source .
+
+# PRODUCTION - SỬ DỤNG SSL TỪ NGINX PROXY MANAGER HOẶC CÁC PROXY KHÁC
+# CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "-w", "4", "Main:app", "-b", "0.0.0.0:80"]
+
+# DEVELOPMENT - SỬ DỤNG SSL RIÊNG CHO PHÁT TRIỂN
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "-w", "4", "Main:app", "-b", "0.0.0.0:443", "--certfile=/app/ssl/vmk.cer", "--keyfile=/app/ssl/vmk.key"]

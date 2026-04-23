@@ -1,0 +1,20 @@
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - VMK_NETWORK_01
+    command:
+      ["redis-server", "--appendonly", "yes", "--requirepass", "pwd_redis"]
+    volumes:
+      - redis:/data
+
+volumes:
+  redis:
+
+networks:
+  VMK_NETWORK_01:
+    external: true
