@@ -1,0 +1,24 @@
+# STAGE 1: BUILD
+
+FROM golang:1.26.2-alpine3.22 AS builder
+
+WORKDIR /app
+
+COPY ./source/go.mod ./
+RUN go mod download
+
+COPY ./source .
+
+RUN go build -o main .
+
+# STAGE 2: RUN
+
+FROM alpine:latest
+
+WORKDIR /root/
+
+COPY --from=builder /app/main .
+
+EXPOSE 8080
+
+CMD ["./main"]

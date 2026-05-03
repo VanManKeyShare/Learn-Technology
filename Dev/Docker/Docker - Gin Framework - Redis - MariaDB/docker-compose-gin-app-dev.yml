@@ -1,0 +1,33 @@
+services:
+  gin-app-dev:
+    build:
+      context: .
+      dockerfile: ./DockerFile.dev
+    container_name: gin-app-dev
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - VMK_NETWORK_01
+    environment:
+      DB_HOST: mariadb
+      DB_PORT: 3306
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: pwd_redis
+      MYSQL_DATABASE: mysql_db
+      MYSQL_USER: mysql_user
+      MYSQL_PASSWORD: mysql_pwd
+      TRUSTED_PROXIES: "172.17.0.0/16, 172.18.0.0/16, 192.168.0.0/16"
+    develop:
+      watch:
+        - action: sync
+          path: ./source
+          target: /app
+        - action: sync+restart
+          path: ./source
+          target: /app
+
+networks:
+  VMK_NETWORK_01:
+    external: true

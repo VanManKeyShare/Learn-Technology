@@ -1,0 +1,11 @@
+
+FROM golang:1.26.2-alpine3.22
+
+WORKDIR /app
+
+COPY ./source/go.mod ./
+RUN go mod download
+
+COPY ./source .
+
+CMD ["go", "run", "."]
